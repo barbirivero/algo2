@@ -80,8 +80,8 @@ uint Cuadrado::lado() {
 }
 
 float Cuadrado::area() {
-    return r_alto() * r_alto();
-}
+    return r_.alto() * r_.alto();
+};
 
 // Ejercicio 4
 class Circulo {
@@ -91,7 +91,7 @@ class Circulo {
         float area();
     private:
         Elipse e_;
-}
+};
 
 Circulo::Circulo(uint radio) : e_(radio, radio) {};
 

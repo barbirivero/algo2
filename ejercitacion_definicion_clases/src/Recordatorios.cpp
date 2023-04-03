@@ -20,23 +20,43 @@ uint dias_en_mes(uint mes) {
 // Clase Fecha
 class Fecha {
   public:
-    // Completar declaraciones funciones
+    Fecha(uint mes,uint dia);
+    uint mes();
+    uint dia();
+
     #if EJ >= 9 // Para ejercicio 9
     bool operator==(Fecha o);
     #endif
 
   private:
-    //Completar miembros internos
+    uint mes_;
+    uint dia_;
 };
 
+Fecha::Fecha(uint mes, uint dia) : mes_(mes), dia_(dia) {}
+/*
+Fecha::Fecha(int mes, int dia): mes_(mes), dia_(dia) {};
+*/
+
+uint Fecha::mes(){
+    return mes_;
+}
+
+uint Fecha::dia(){
+    return dia_;
+}
 
 #if EJ >= 9
 bool Fecha::operator==(Fecha o) {
-    bool igual_dia = this->dia() == o.dia();
-    // Completar iguadad (ej 9)
-    return igual_dia;
+    bool igual_fecha = this->dia() == o.dia() && this->mes() == o.mes();
+    return igual_fecha;
 }
 #endif
+
+ostream& operator<<(ostream& os, Fecha f) {
+    os << f.dia()<< "/" <<f.mes();
+    return os;
+}
 
 // Ejercicio 11, 12
 
