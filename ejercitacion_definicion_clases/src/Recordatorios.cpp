@@ -23,6 +23,7 @@ class Fecha {
     Fecha(uint mes,uint dia);
     uint mes();
     uint dia();
+    void incrementar_dia();
 
     #if EJ >= 9 // Para ejercicio 9
     bool operator==(Fecha o);
@@ -34,9 +35,6 @@ class Fecha {
 };
 
 Fecha::Fecha(uint mes, uint dia) : mes_(mes), dia_(dia) {}
-/*
-Fecha::Fecha(int mes, int dia): mes_(mes), dia_(dia) {};
-*/
 
 uint Fecha::mes(){
     return mes_;
@@ -58,10 +56,67 @@ ostream& operator<<(ostream& os, Fecha f) {
     return os;
 }
 
-// Ejercicio 11, 12
+//Ejercicio 10
+void Fecha::incrementar_dia(){
+    if(mes_ == 12 && dia_ == 31){
+        mes_ = 1;
+        dia_ = 1;
+    }
+    else{
+        if(dia_ < dias_en_mes(mes_)){
+            dia_ = dia_ + 1;
+        }
+        else{
+            mes_ = mes_ + 1;
+            dia_ = 1;
+        }
+    }
+};
 
 // Clase Horario
 
+//Ejercicio 11
+class Horario{
+    public:
+        Horario(uint hora, uint minutos);
+        uint hora();
+        uint min();
+        bool operator==(Horario h);
+        bool operator<(Horario h);
+    private:
+        uint hora_;
+        uint minutos_;
+};
+
+Horario::Horario(uint hora, uint min): hora_(hora),minutos_(min){};
+
+uint Horario::hora(){
+    return hora_;
+};
+
+uint Horario::min(){
+    return minutos_;
+};
+
+ostream& operator<<(ostream& os, Horario h) {
+    os << h.hora() << ":" << h.min();
+    return os;
+};
+
+bool Horario::operator==(Horario h) {
+    bool igual_horario = this->hora() == h.hora() && this->min() == h.min();
+    return igual_horario;
+};
+
+//Ejercicio 12
+bool Horario::operator<(Horario h){
+    if(this->hora() == h.hora()) {
+        return this->min() < h.min();
+    }
+    else{
+        return this->hora() < h.hora();
+    }
+};
 
 // Ejercicio 13
 
