@@ -107,23 +107,23 @@ float Circulo::area() {
 // Ejercicio 5
 
 ostream& operator<<(ostream& os, Rectangulo r) {
-    os << "Rect(" << r.ancho() << ", " << r.alto() << ")";
+    os << "Rect(" << r.alto() << ", " << r.ancho() << ")";
     return os;
 }
 
 ostream& operator<<(ostream& os, Elipse e) {
-    os << "Elip(" << e.r_a() << ", " << e.r_b() << ")";
+    os << "Elipse(" << e.r_a() << ", " << e.r_b() << ")";
     return os;
 }
 
 // Ejercicio 6
 
 ostream& operator<<(ostream& os, Cuadrado cua) {
-    os << "Cua(" << cua.lado() << ")";
+    os << "Cuad(" << cua.lado() << ")";
     return os;
 }
 
 ostream& operator<<(ostream& os, Circulo cir) {
-    os << "Cir(" << cir.radio() << ")";
+    os << "Circ(" << cir.radio() << ")";
     return os;
 }
