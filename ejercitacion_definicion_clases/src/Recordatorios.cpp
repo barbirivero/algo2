@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <list>
 using namespace std;
 
 using uint = unsigned int;
@@ -120,10 +120,88 @@ bool Horario::operator<(Horario h){
 
 // Ejercicio 13
 
-// Clase Recordatorio
+class Recordatorio {
+    public:
+        Recordatorio(Fecha fecha, Horario horario, string mensaje);
+        Fecha fecha();
+        Horario horario();
+        string mensaje();
+    bool operator<(Recordatorio r);
 
+    private:
+        Fecha fecha_;
+        Horario horario_;
+        string mensaje_;
+};
+
+Recordatorio::Recordatorio(Fecha fecha, Horario horario, string mensaje) : fecha_(fecha), horario_(horario), mensaje_(mensaje){};
+
+Fecha Recordatorio::fecha(){
+    return fecha_;
+}
+
+Horario Recordatorio::horario(){
+    return horario_;
+}
+
+string Recordatorio::mensaje(){
+    return mensaje_;
+}
+
+ostream& operator<<(ostream& os, Recordatorio r) {
+    os << r.mensaje() << " @ " << r.fecha() << " " << r.horario();
+    return os;
+};
+
+bool Recordatorio::operator<(Recordatorio r){
+    return horario() < r.horario();
+};
 
 // Ejercicio 14
 
-// Clase Agenda
+class Agenda {
+    public:
+        Agenda(Fecha fecha_inicial);
+        void agregar_recordatorio(Recordatorio rec);
+        void incrementar_dia();
+        list<Recordatorio> recordatorios_de_hoy();
+        Fecha hoy();
+    private:
+        list<Recordatorio> recordatorios_de_hoy_;
+        Fecha hoy_;
+};
 
+Agenda::Agenda(Fecha fecha_inicial) : hoy_(fecha_inicial) {} ;
+
+void Agenda::agregar_recordatorio(Recordatorio rec) {
+    recordatorios_de_hoy_.push_back(rec) ;
+}
+
+void Agenda::incrementar_dia() {
+    hoy_.incrementar_dia();
+}
+
+list<Recordatorio> Agenda::recordatorios_de_hoy() {
+    list<Recordatorio> res;
+    for (Recordatorio i : recordatorios_de_hoy_){
+        if (i.fecha() == hoy_){
+            res.push_back(i);
+        }
+    }
+    return res;
+};
+
+Fecha Agenda::hoy() {
+    return hoy_;
+};
+
+ostream& operator<<(ostream& os, Agenda a) {
+    os << a.hoy() << endl;
+    os << "=====" << endl;
+    list<Recordatorio> ab = a.recordatorios_de_hoy();
+    ab.sort();
+    for(Recordatorio i : ab){
+        os << i << endl;
+    }
+    return os;
+};
